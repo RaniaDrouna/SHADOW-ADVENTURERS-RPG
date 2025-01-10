@@ -1,0 +1,274 @@
+//Character Stats class
+ class CharacterStats {
+     int strength;
+     int dexterity;
+     int intelligence;
+     int vitality;
+     int wisdom;
+     int luck;
+
+     public CharacterStats(int str, int dex, int intel, int vit, int wis, int lck) {
+         this.strength = str;
+         this.dexterity = dex;
+         this.intelligence = intel;
+         this.vitality = vit;
+         this.wisdom = wis;
+         this.luck = lck;
+     }
+ }
+
+ //Paladin class
+ class Paladin extends Protagonist {
+     public Paladin(String name) {
+         super(name,
+                 110, // HP
+                 80,  // MP
+                 11,  // Base damage
+                 "A holy knight devoted to the Light, combining martial prowess with divine magic.",
+                 new CharacterStats(16, 10, 12, 14, 14, 8),
+                 "Divine Protection");
+     }
+
+     @Override
+     public void attack(Protagonist target) {
+         // Basic holy attack implementation
+         target.receiveDamage(damage);
+     }
+
+     @Override
+     public void useSkill(Protagonist target) {
+         if (manaPoints >= 20) {
+             target.receiveDamage(damage * 2);
+             this.healthPoints += damage; // Divine healing
+             manaPoints -= 20;
+         }
+     }
+ }
+
+ //Ranger Class
+ class Ranger extends Protagonist {
+     public Ranger(String name) {
+         super(name,
+                 95,  // HP
+                 60,  // MP
+                 13,  // Base damage
+                 "A wilderness expert skilled in ranged combat and survival.",
+                 new CharacterStats(12, 16, 10, 12, 12, 12),
+                 "Precision Shot");
+     }
+
+     @Override
+     public void attack(Protagonist target) {
+         // Basic ranged attack implementation
+         target.receiveDamage(damage);
+     }
+
+     @Override
+     public void useSkill(Protagonist target) {
+         if (manaPoints >= 15) {
+             if (target != null && target.isAlive()) {
+                 target.receiveDamage((int) (damage * 2.5)); // Deal precision damage
+             }
+             manaPoints -= 15;
+         }
+     }
+ }
+
+
+
+
+ // Protagonist class
+ abstract class Protagonist {
+     protected String name;
+     protected int healthPoints;
+     protected int maxHealthPoints;
+     protected int manaPoints;
+     protected int maxManaPoints;
+     protected int damage;
+     protected int level;
+     protected int experience;
+     protected String backstory;
+     protected CharacterStats stats;
+     protected String specialty;
+
+     public Protagonist(String name, int hp, int mp, int damage, String backstory, CharacterStats stats, String specialty) {
+         this.name = name;
+         this.healthPoints = hp;
+         this.maxHealthPoints = hp;
+         this.manaPoints = mp;
+         this.maxManaPoints = mp;
+         this.damage = damage;
+         this.level = 1;
+         this.experience = 0;
+         this.backstory = backstory;
+         this.stats = stats;
+         this.specialty = specialty;
+     }
+
+     public Protagonist(String name, int healthPoints, int damage, String s) {
+     }
+
+     public void receiveDamage(int damage) {
+         healthPoints -= damage;
+     }
+
+     public boolean isAlive() {
+         return healthPoints > 0;
+     }
+
+     public String getName() {
+         return name;
+     }
+
+     public String getBackstory() {
+         return backstory;
+     }
+
+     public abstract void attack(Protagonist target);
+     public abstract void useSkill(Protagonist target);
+ }
+
+ // Enemy class
+class Enemy extends Protagonist {
+    private boolean isDodging;
+    private int accuracy; // Percentage chance to hit (0-100)
+
+    public Enemy(String name, int healthPoints, int damage) {
+        super(name, healthPoints, damage, "A mysterious entity lurking in the shadows.");
+        this.accuracy = 75; // Default 75% accuracy
+        this.isDodging = false;
+    }
+
+    @Override
+    public void attack(Protagonist target) {
+        int hitChance = (int) (Math.random() * 100);
+        if (hitChance < accuracy) {
+            int finalDamage = damage;
+            target.receiveDamage(finalDamage);
+        }
+    }
+
+    @Override
+    public void useSkill(Protagonist target) {
+        // Basic enemies don't have special skills by default
+    }
+
+    @Override
+    public void receiveDamage(int incomingDamage) {
+        int finalDamage = incomingDamage;
+        if (isDodging) {
+            finalDamage /= 2;
+        }
+        super.receiveDamage(finalDamage);
+    }
+
+    public void setDodging(boolean dodging) {
+        this.isDodging = dodging;
+    }
+
+    public boolean isDodging() {
+        return isDodging;
+    }
+
+    public void setAccuracy(int accuracy) {
+        this.accuracy = Math.min(100, Math.max(0, accuracy)); // Ensure accuracy stays between 0-100
+    }
+
+    public int getAccuracy() {
+        return accuracy;
+    }
+
+    // Simple AI decision making
+    public void decideAction(Protagonist target) {
+        if (healthPoints < 30 && Math.random() < 0.2) {
+            setDodging(true);
+        } else {
+            attack(target);
+        }
+    }
+}
+
+ // Mage class
+class Mage extends Protagonist {
+    public Mage(String name) {
+        super(name,
+                80,  // HP
+                150, // MP
+                15,  // Base damage
+                "An arcane scholar from the Celestial Academy, wielding powerful elemental magic.",
+                new CharacterStats(8, 10, 18, 10, 16, 10),
+                "Elemental Mastery");
+    }
+
+    @Override
+    public void attack(Protagonist target) {
+        // Basic magic attack implementation
+        target.receiveDamage(damage);
+    }
+
+    @Override
+    public void useSkill(Protagonist target) {
+        if (manaPoints >= 25) {
+            target.receiveDamage(damage * 3);
+            manaPoints -= 25;
+        }
+    }
+}
+
+
+
+ // Thief class
+class Thief extends Protagonist {
+    public Thief(String name) {
+        super(name,
+                90,  // HP
+                70,  // MP
+                14,  // Base damage
+                "A shadow walker from the Thieves' Guild, specializing in stealth and precision strikes.",
+                new CharacterStats(12, 18, 10, 12, 8, 16),
+                "Critical Strike Mastery");
+    }
+
+    @Override
+    public void attack(Protagonist target) {
+        // Basic stealth attack implementation
+        target.receiveDamage(damage);
+    }
+
+    @Override
+    public void useSkill(Protagonist target) {
+        if (manaPoints >= 20) {
+            target.receiveDamage(damage * 3); // Critical strike
+            manaPoints -= 20;
+        }
+    }
+}
+
+
+ // Warrior class
+ class Warrior extends Protagonist {
+     public Warrior(String name) {
+         super(name,
+                 120, // HP
+                 50,  // MP
+                 12,  // Base damage
+                 "A battle-hardened warrior from the Northern Kingdoms, trained in the art of heavy armor and weapons.",
+                 new CharacterStats(18, 12, 8, 16, 10, 8),
+                 "Heavy Armor Mastery");
+     }
+
+     @Override
+     public void attack(Protagonist target) {
+         // Basic attack implementation
+         target.receiveDamage(damage);
+     }
+
+     @Override
+     public void useSkill(Protagonist target) {
+         if (manaPoints >= 15) {
+             target.receiveDamage((int)(damage * 2.5));
+             manaPoints -= 15;
+         }
+     }
+ }
+
