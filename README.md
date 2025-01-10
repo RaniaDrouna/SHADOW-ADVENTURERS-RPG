@@ -8,7 +8,7 @@ the sound files were too large to be included in the repo
 please download the music file folder and copy it under the RPGPOO directory : https://www.mediafire.com/folder/jw8r6dn1rsajj/music
 
 ## FONT USAGE
-unfortunately windows doesnt come with many video gamey fonts, so i used the following ones, please download them for a better experience
+unfortunately windows doesnt come with many video gamey fonts, so i used the following ones, please download them for a better experience, they can be found under the fonts folder
 - the splash screen includes the font "Angel Wish" 
 - the game over screen includes the font "Alagard" 
 
