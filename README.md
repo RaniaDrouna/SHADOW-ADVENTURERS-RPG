@@ -1,4 +1,4 @@
-**Shadow adevntures** is a java based RPG with a visual novel-looking interface inspired by 80s fantasy RPGs 
+**Shadow adventurers** is a java based RPG with a visual novel-looking interface inspired by 80s fantasy RPGs 
 
 # TO RUN THE GAME CORRECTLY
 
