@@ -9,8 +9,8 @@ please download the music file folder and copy it under the RPGPOO directory : h
 
 ## FONT USAGE
 unfortunately windows doesnt come with many video gamey fonts, so i used the following ones, please download them for a better experience
-the splash screen includes the font "Angel Wish" 
-the game over screen includes the font "Alagard" 
+- the splash screen includes the font "Angel Wish" 
+- the game over screen includes the font "Alagard" 
 
 ## Character classes 
 the game includes multiple character classes to choose from, each with unique stats 
