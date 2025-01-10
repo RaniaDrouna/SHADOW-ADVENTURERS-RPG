@@ -29,12 +29,12 @@ RPGPOO/
    - Ranger.java
    - Mage.java
    - Paladin.java
-     music/
+   - music/
        - background.wav
        - gameover.wav
-     background/
+   - background/
        - dungeon.jpg
-     fonts/
+   - fonts/
         - font 1 
         - font 2
 
