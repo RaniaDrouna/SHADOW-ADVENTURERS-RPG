@@ -465,7 +465,7 @@ public class Main {
                 backgroundMusic.close();
             }
 
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File("music/background.wav"));
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File("music/background.wav.wav"));
             backgroundMusic = AudioSystem.getClip();
             backgroundMusic.open(audioStream);
             backgroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
@@ -487,7 +487,7 @@ public class Main {
             }
 
 
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File("music/gameover.wav"));
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File("music/gameover.wav.wav"));
             gameOverMusic = AudioSystem.getClip();
             gameOverMusic.open(audioStream);
             gameOverMusic.start();
@@ -758,7 +758,7 @@ public class Main {
                     startCombatTimer();
                 });
             }
-        }, 2000);
+        }, 3000);
     }
 
 
@@ -845,7 +845,7 @@ public class Main {
                         public void run() {
                             SwingUtilities.invokeLater(() -> performEnemyAttack());
                         }
-                    }, 2000);
+                    }, 8000);
                 });
             }
         }, 3000);
