@@ -20,9 +20,6 @@ the game includes simple combat systems where the player needs to attack the ene
 
  ## project structure 
  shadow-adventurers/
-fonts/
-        - font 1 
-        - font 2
 RPGPOO/
    - main.java
    - Protagonist.java
